@@ -70,8 +70,6 @@ r_15_60 <- ggplot(red, aes(x = diff_15m, y = diff_60m)) +
   ) +
   xlab("UY shift 15m (nm)") +
   ylab("UY shift 60m (nm)") +
-  ylim(0,18) +
-  xlim(0,16) +
   theme_bw(base_size = 14) +
   theme(panel.grid = element_blank())
 
@@ -88,8 +86,6 @@ r_15_240 <- ggplot(red, aes(x = diff_15m, y = diff_240m)) +
   ) +
   xlab("UY shift 15m (nm)") +
   ylab("UY shift 240m (nm)") +
-  ylim(0,18) +
-  xlim(0,16) +
   theme_bw(base_size = 14) +
   theme(panel.grid = element_blank())
 
@@ -106,15 +102,13 @@ r_60_240 <- ggplot(red, aes(x = diff_60m, y = diff_240m)) +
   ) +
   xlab("UY shift 60m (nm)") +
   ylab("UY shift 240h (nm)") +
-  ylim(0,18) +
-  xlim(0,16) +
   theme_bw(base_size = 14) +
   theme(panel.grid = element_blank())
 
 
 #put graphs together
 
-allcorrs <- ggarrange(r_15_60, r_15_240, r_60_240,ncol = 3, nrow = 1)
+allcorrs <- ggarrange(r_15_60, r_15_240, r_60_240, ncol = 3, nrow = 1)
 
 
 # Correlations ------------------------------------------------------------
