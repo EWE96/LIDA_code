@@ -7,10 +7,6 @@ setwd('//') #set path to file
 
 datafile <- read_excel('dummy_data.xlsx', sheet = 'red')
 
-#tidy dataframe
-
-datafile[ ,c(5:11)] <- list(NULL)
-
 #define a new variable 'trial' in the dataframe
 
 trialnos <- c(1:10)
@@ -42,6 +38,8 @@ post_red <- datafile %>% filter(Measurement_time == '5-post')
 
 lm_red <- lm(Wavelength ~ Trial, data = post_red)
 
+coef_red <- coef(lm_red)["Trial"] 
+
 
 # Graph -------------------------------------------------------------------
 
@@ -62,14 +60,13 @@ trialplt_r <- ggplot(averageddata,
         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   labs(y = "Unique Yellow Wavelength",
        linetype = "Measurement Time") +
-  ylim(570,586) + 
   scale_x_continuous(breaks = seq(0,10,1))
 
 
 # Extrapolation -----------------------------------------------------------
 
 
-slope_red <- -0.1039 #from linear regression
+slope_red <- coef_red
 lasttrial_red <- post_red %>% filter(Trial == '10') %>%
   summarise(mean_wavelength = mean(Wavelength, na.rm = TRUE))
 red_pre <- datafile %>% filter(Measurement_time == 'pre') %>%
